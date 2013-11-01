@@ -2,19 +2,28 @@ require 'rspec'
 require 'hand'
 
 describe Hand do
+  let(:deck) { double("deck", :deal => [
+                        Card.new(10,:heart),
+                        Card.new(4, :spade),
+                        Card.new(3, :diamond),
+                        Card.new(1, :diamond),
+                        Card.new(9, :club) ] )
+              }
+
+  let(:high_card_hand) { Hand.new(deck.deal) }
 
   describe '#initialize' do
 
-    let(:high_card_hand) { Hand.new(deck.deal) }
+    it 'should have five cards' do
+      expect(high_card_hand.cards.size).to eq(5)
+    end
 
-    let(:deck) { double("deck", :deal => [
-                          Card.new(10,:heart),
-                          Card.new(4, :spade),
-                          Card.new(3, :diamond),
-                          Card.new(1, :diamond),
-                          Card.new(9, :club) ] )
-                }
+    it 'should be only cards' do
+      expect(high_card_hand.cards.all? { |card| card.is_a?(Card) } ).to be true
+    end
+  end
 
+  describe '#rank' do
     let(:pair_hand) { Hand.new([
                             Card.new(10,:heart),
                             Card.new(10,:spade),
@@ -87,18 +96,8 @@ describe Hand do
                             Card.new(7, :club) ])
                           }
 
-    it 'should have five cards' do
-      expect(high_card_hand.cards.size).to eq(5)
-    end
-
-    it 'should be only cards' do
-      expect(high_card_hand.cards.all? { |card| card.is_a?(Card) } ).to be true
-    end
-  end
-
-  describe '#rank' do
     it 'should determine highest card' do
-      expect(high_card_hand.rank[:best_card].value).to eq(10)
+      expect(high_card_hand.rank[:best_card]).to eq(10)
     end
 
     it 'should evaluate high card' do
