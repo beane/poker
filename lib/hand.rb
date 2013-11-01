@@ -1,4 +1,9 @@
+require_relative 'deck'
 class Hand
-  def initialize
+
+  attr_reader :cards
+
+  def initialize(cards) # just an array of cards
+    @cards = cards
   end
 end
