@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require_relative 'errors'
 class Card
 
@@ -14,7 +15,7 @@ class Card
                   :spade => "♠"
                 }
 
-  attr_readers :value, :suit
+  attr_reader :value, :suit
 
   def initialize(value, suit)
     raise NoSuitError unless DISPLAY_SUIT.keys.include?(suit)
