@@ -3,7 +3,7 @@ require 'rspec'
 require 'card'
 
 describe Card do
-  subject(:card) { Card.new(12, :hearts) }
+  subject(:card) { Card.new(13, :hearts) }
 
   it 'has a value' do
     expect(card.value).to be truthy
@@ -24,6 +24,5 @@ describe Card do
   it 'displays a unicode card' do
     expect(card.display).to eq "♡K♡"
   end
-
 
 end
