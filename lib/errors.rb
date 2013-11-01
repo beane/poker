@@ -12,6 +12,6 @@ end
 
 class OutOfCardsError < StandardError
   def message
-    "All 52 cards have been dealt"
+    "All 52 cards have been dealt."
   end
 end

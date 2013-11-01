@@ -21,7 +21,7 @@ describe Card do
     expect { Card.new(76, :heart) }.to raise_error(NoValueError)
   end
 
-  it 'displays a unicode card' do
+  it 'displays a string' do
     expect(card.display).to be_an_instance_of(String)
   end
 
