@@ -5,7 +5,7 @@ class Deck
 
   def initialize
     @cards = []
-    (1..13).each do |value|
+    (2..14).each do |value|
       Card::DISPLAY_SUITS.keys.each do |suit|
         @cards << Card.new(value, suit)
       end

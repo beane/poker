@@ -8,7 +8,7 @@ class Card
     11 => 'J',
     12 => 'Q',
     13 => 'K',
-    1 => 'A',
+    14 => 'A',
   }
 
   DISPLAY_SUITS = {
@@ -29,7 +29,7 @@ class Card
 
   def initialize(value, suit)
     raise NoSuitError unless DISPLAY_SUITS.keys.include?(suit)
-    raise NoValueError unless (1..13).include?(value)
+    raise NoValueError unless (2..14).include?(value)
     @value, @suit = value, suit
   end
 
