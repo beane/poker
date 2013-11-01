@@ -1,6 +1,18 @@
 require_relative 'deck'
 class Hand
 
+  HAND_VALUES = {
+                  :straight_flush => 9,
+                  :four => 8,
+                  :full_house => 7,
+                  :flush => 6,
+                  :straight => 5,
+                  :three => 4,
+                  :two_pair => 3,
+                  :pair => 2,
+                  :high_card => 1
+                }
+
   attr_reader :cards
 
   def initialize(cards) # just an array of cards
@@ -8,35 +20,41 @@ class Hand
   end
 
   def rank
-    best_card = card_values.max
-    return {:best_hand => :straight_flush} if is_straight_flush?
-    return {:best_hand => :four} if is_four?
-    return {:best_hand => :full_house} if is_full_house?
-    return {:best_hand => :flush} if is_flush?
-    return {:best_hand => :straight} if is_straight?
-    return {:best_hand => :three} if is_three?
-    return {:best_hand => :two_pair} if is_two_pair?
-    return {:best_hand => :pair} if is_pair?
+    return :straight_flush if is_straight_flush?
+    return :four if is_four?
+    return :full_house if is_full_house?
+    return :flush if is_flush?
+    return :straight if is_straight?
+    return :three if is_three?
+    return :two_pair if is_two_pair?
+    return :pair if is_pair?
 
-    {:best_hand => :high_card, :best_card => best_card}
+    :high_card
   end
 
   def <=>(other_hand)
+    comparison = HAND_VALUES[rank] <=> HAND_VALUES[other_hand.rank]
+    return comparison unless comparison == 0
+
 
   end
 
   private
+
+  def nth_highest_relevant_card(n)
+    value_repeats.sort_by { |key, value| value }[-n][0]
+  end
 
   def is_straight_flush?
     is_straight? && is_flush?
   end
 
   def is_four?
-    value_repeats.include?(4)
+    value_repeats.values.include?(4)
   end
 
   def is_full_house?
-    value_repeats == [2,3]
+    value_repeats.values.sort == [2,3]
   end
 
   def is_flush?
@@ -65,15 +83,15 @@ class Hand
   end
 
   def is_three?
-    value_repeats.include?(3)
+    value_repeats.values.include?(3)
   end
 
   def is_two_pair?
-    value_repeats.select { |freq| freq == 2 }.size == 2
+    value_repeats.values.select { |freq| freq == 2 }.size == 2
   end
 
   def is_pair?
-    value_repeats.include?(2)
+    value_repeats.values.include?(2)
   end
 
   def value_repeats
@@ -82,7 +100,7 @@ class Hand
       value_count[card.value] += 1
     end
 
-    value_count.values.sort
+    value_count
   end
 
   def card_values

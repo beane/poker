@@ -6,11 +6,19 @@ describe Hand do
                         Card.new(10,:heart),
                         Card.new(4, :spade),
                         Card.new(3, :diamond),
-                        Card.new(14, :diamond),
+                        Card.new(13, :diamond),
                         Card.new(9, :club) ] )
               }
 
   let(:high_card_hand) { Hand.new(deck.deal) }
+
+  let(:ace_high_hand) { Hand.new([
+                          Card.new(10,:heart),
+                          Card.new(5,:spade),
+                          Card.new(3, :diamond),
+                          Card.new(14, :diamond),
+                          Card.new(9, :club) ])
+                        }
 
   let(:pair_hand) { Hand.new([
                           Card.new(10,:heart),
@@ -113,39 +121,43 @@ describe Hand do
 
   describe '#rank' do
     it 'should evaluate high card' do
-      expect(high_card_hand.rank[:best_hand]).to eq(:high_card)
+      expect(high_card_hand.rank).to eq(:high_card)
     end
 
     it 'should evaluate pair' do
-      expect(pair_hand.rank[:best_hand]).to eq(:pair)
+      expect(pair_hand.rank).to eq(:pair)
     end
 
     it 'should evaluate two pair' do
-      expect(two_pair_hand.rank[:best_hand]).to eq(:two_pair)
+      expect(two_pair_hand.rank).to eq(:two_pair)
     end
 
     it 'should evaluate three of a kind' do
-      expect(three_hand.rank[:best_hand]).to eq(:three)
+      expect(three_hand.rank).to eq(:three)
     end
 
     it 'should evaluate straight' do
-      expect(straight_hand.rank[:best_hand]).to eq(:straight)
+      expect(straight_ace_hand.rank).to eq(:straight)
     end
 
     it 'should evaluate flush' do
-      expect(flush_hand.rank[:best_hand]).to eq(:flush)
+      expect(flush_hand.rank).to eq(:flush)
     end
 
     it 'should evaluate full house' do
-      expect(full_house_hand.rank[:best_hand]).to eq(:full_house)
+      expect(full_house_hand.rank).to eq(:full_house)
     end
 
     it 'should evaluate four of a kind' do
-      expect(four_hand.rank[:best_hand]).to eq(:four)
+      expect(four_hand.rank).to eq(:four)
     end
 
     it 'should evaluate straight flush' do
-      expect(straight_flush_hand.rank[:best_hand]).to eq(:straight_flush)
+      expect(straight_flush_hand.rank).to eq(:straight_flush)
+    end
+
+    it 'evalutes wheel straits correctly' do
+      expect(straight_hand.rank).to eq(:straight)
     end
   end
 
@@ -153,19 +165,20 @@ describe Hand do
     it 'correctly finds simple winning hands' do
       expect(straight_flush_hand <=> flush_hand).to eq(1)
       expect(two_pair_hand <=> straight_hand).to eq(-1)
-      expect(four_hand <=> full_house).to eq(1)
+      expect(four_hand <=> full_house_hand).to eq(1)
     end
 
     it 'correctly compares hands of same rank' do
-      expect(four_hand <=> other_four_hand).to eq(1)
+      expect(four_hand <=> other_four_hand).to eq(-1)
     end
 
     it 'correctly uses high card to compare hands' do
-      expect(two_pair_hand <=> other_two_pair_hand).to eq(1)
+      expect(two_pair_hand <=> other_two_pair_hand).to eq(-1)
     end
 
     it 'evaluates aces correctly' do
-      # ace high ace low in straight and high card
+      expect(straight_hand <=> straight_ace_hand).to eq(1)
+      expect(ace_high_hand <=> high_card_hand).to eq(1)
     end
   end
 end
