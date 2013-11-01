@@ -4,6 +4,7 @@ require 'deck'
 describe Deck do
 
   subject(:deck) { Deck.new }
+  let(:shuffled_deck) { Deck.new.shuffle }
 
   describe "#initialize" do
     it "should have 52 cards" do
@@ -17,7 +18,7 @@ describe Deck do
 
   describe "#shuffle" do
     it 'should shuffle the deck' do
-      expect(deck.shuffle.cards).not_to eq(deck.shuffle.cards)
+      expect(deck.cards).not_to eq(shuffled_deck)
     end
 
     it 'should still have 52 cards' do
@@ -50,8 +51,7 @@ describe Deck do
     end
 
     it 'should raise error if out of cards' do
-      expect { deck.deal(48) }.to raise_error(OutOfCards)
+      expect { deck.deal(48) }.to raise_error(OutOfCardsError)
     end
-
   end
 end
