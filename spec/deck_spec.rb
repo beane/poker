@@ -48,5 +48,10 @@ describe Deck do
     it 'should return only the top cards' do
       expect(bottom_card).to be(deck.cards.last)
     end
+
+    it 'should raise error if out of cards' do
+      expect { deck.deal(48) }.to raise_error(OutOfCards)
+    end
+
   end
 end
