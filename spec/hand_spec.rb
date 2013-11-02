@@ -177,7 +177,7 @@ describe Hand do
     end
 
     it 'evaluates aces correctly' do
-      expect(straight_hand <=> straight_ace_hand).to eq(1)
+      expect(straight_hand <=> straight_ace_hand).to eq(-1)
       expect(ace_high_hand <=> high_card_hand).to eq(1)
     end
   end
