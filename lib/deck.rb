@@ -5,6 +5,7 @@ class Deck
 
   def initialize
     @cards = []
+    
     (2..14).each do |value|
       Card::DISPLAY_SUITS.keys.each do |suit|
         @cards << Card.new(value, suit)
@@ -19,6 +20,7 @@ class Deck
 
   def deal(num_cards)
     raise OutOfCardsError if num_cards > self.cards.size
+    
     new_cards = @cards.take(num_cards)
     @cards = @cards.drop(num_cards)
 

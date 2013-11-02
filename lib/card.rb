@@ -30,6 +30,7 @@ class Card
   def initialize(value, suit)
     raise NoSuitError unless DISPLAY_SUITS.keys.include?(suit)
     raise NoValueError unless (2..14).include?(value)
+    
     @value, @suit = value, suit
   end
 

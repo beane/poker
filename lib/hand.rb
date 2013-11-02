@@ -19,7 +19,7 @@ class Hand
     @cards = cards
   end
 
-  def rank
+  def rank # checks in descending winning order
     return :straight_flush if is_straight_flush?
     return :four if is_four?
     return :full_house if is_full_house?
@@ -32,9 +32,10 @@ class Hand
     :high_card
   end
 
+  # returns -1 if it beats the other hand, 1 if it loses
   def <=>(other_hand)
     comparison = HAND_VALUES[rank] <=> HAND_VALUES[other_hand.rank]
-    return comparison unless comparison == 0
+    return comparison unless comparison == 0 # if they're of equal rank
 
 
   end
@@ -59,33 +60,38 @@ class Hand
 
   def is_flush?
     suit_count = Hash.new(0)
-    self.cards.each do |card|
-      suit_count[card.suit] += 1
-    end
+    
+    self.cards.each { |card| suit_count[card.suit] += 1 }
 
     suit_count.values.include?(5)
   end
 
   def is_straight?
-    actual_card_values = card_values
-    normalized_card_values = actual_card_values.map do |val|
+    ace_high_card_values = card_values # assumes ace is 14
+    
+    ace_low_card_values = ace_high_card_values.map do |val|
       new_val = val if val < 14
       new_val = 1 if val == 14
       new_val
     end
-    return true if is_normalized_straight?(actual_card_values)
-    is_normalized_straight?(normalized_card_values)
+    
+    # checks if it's a straight with ace high,
+    # otherwise checks with ace low
+    return true if is_normalized_straight?(ace_high_card_values)
+    
+    is_normalized_straight?(ace_low_card_values)
   end
 
   def is_normalized_straight?(card_values)
     return false unless card_values.max - card_values.min == 4
-    card_values.uniq.size > 4
+    card_values.uniq.size == 5
   end
 
   def is_three?
     value_repeats.values.include?(3)
   end
 
+  # returns true if there are two values which each appear twice
   def is_two_pair?
     value_repeats.values.select { |freq| freq == 2 }.size == 2
   end
@@ -96,9 +102,8 @@ class Hand
 
   def value_repeats
     value_count = Hash.new(0)
-    self.cards.each do |card|
-      value_count[card.value] += 1
-    end
+    
+    self.cards.each { |card| value_count[card.value] += 1 }
 
     value_count
   end
