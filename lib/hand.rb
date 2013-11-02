@@ -1,5 +1,7 @@
 require_relative 'deck'
 class Hand
+  
+  include Comparable
 
   HAND_VALUES = {
                   :straight_flush => 9,

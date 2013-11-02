@@ -163,22 +163,22 @@ describe Hand do
 
   describe '#compare' do
     it 'finds simple winning hands' do
-      expect(straight_flush_hand <=> flush_hand).to eq(1)
-      expect(two_pair_hand <=> straight_hand).to eq(-1)
-      expect(four_hand <=> full_house_hand).to eq(1)
+      expect(straight_flush_hand).to be > flush_hand
+      expect(two_pair_hand).to be < straight_hand
+      expect(four_hand).to be > full_house_hand
     end
 
     it 'correctly compares hands of same rank' do
-      expect(four_hand <=> other_four_hand).to eq(-1)
+      expect(four_hand).to be < other_four_hand
     end
 
     it 'correctly uses high card to compare hands' do
-      expect(two_pair_hand <=> other_two_pair_hand).to eq(-1)
+      expect(two_pair_hand).to be < other_two_pair_hand
     end
 
     it 'evaluates aces correctly' do
-      expect(straight_hand <=> straight_ace_hand).to eq(-1)
-      expect(ace_high_hand <=> high_card_hand).to eq(1)
+      expect(straight_hand).to be < straight_ace_hand
+      expect(ace_high_hand).to be > high_card_hand
     end
   end
 end
