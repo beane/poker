@@ -110,49 +110,49 @@ describe Hand do
 
   describe '#initialize' do
 
-    it 'should have five cards' do
+    it 'has five cards' do
       expect(high_card_hand.cards.size).to eq(5)
     end
 
-    it 'should be only cards' do
+    it 'is only cards' do
       expect(high_card_hand.cards.all? { |card| card.is_a?(Card) } ).to be true
     end
   end
 
   describe '#rank' do
-    it 'should evaluate high card' do
+    it 'evaluates high card' do
       expect(high_card_hand.rank).to eq(:high_card)
     end
 
-    it 'should evaluate pair' do
+    it 'evaluates pair' do
       expect(pair_hand.rank).to eq(:pair)
     end
 
-    it 'should evaluate two pair' do
+    it 'evaluates two pair' do
       expect(two_pair_hand.rank).to eq(:two_pair)
     end
 
-    it 'should evaluate three of a kind' do
+    it 'evaluates three of a kind' do
       expect(three_hand.rank).to eq(:three)
     end
 
-    it 'should evaluate straight' do
+    it 'evaluates straight' do
       expect(straight_ace_hand.rank).to eq(:straight)
     end
 
-    it 'should evaluate flush' do
+    it 'evaluates flush' do
       expect(flush_hand.rank).to eq(:flush)
     end
 
-    it 'should evaluate full house' do
+    it 'evaluates full house' do
       expect(full_house_hand.rank).to eq(:full_house)
     end
 
-    it 'should evaluate four of a kind' do
+    it 'evaluates four of a kind' do
       expect(four_hand.rank).to eq(:four)
     end
 
-    it 'should evaluate straight flush' do
+    it 'evaluates straight flush' do
       expect(straight_flush_hand.rank).to eq(:straight_flush)
     end
 
@@ -162,7 +162,7 @@ describe Hand do
   end
 
   describe '#compare' do
-    it 'correctly finds simple winning hands' do
+    it 'sfinds simple winning hands' do
       expect(straight_flush_hand <=> flush_hand).to eq(1)
       expect(two_pair_hand <=> straight_hand).to eq(-1)
       expect(four_hand <=> full_house_hand).to eq(1)
