@@ -39,7 +39,7 @@ class Card
     display = DISPLAY_SUITS[self.suit]
 
     if self.value.between?(2,10)
-      display += self.value
+      display += self.value.to_s
     else
       display += DISPLAY_VALUES[self.value]
     end
@@ -48,5 +48,12 @@ class Card
 
     display.colorize(:color=>color, :background => :white)
   end
+  
+  def render
+    puts display
+  end
 
+  def to_s
+    display
+  end
 end

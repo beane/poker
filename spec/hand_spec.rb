@@ -162,7 +162,7 @@ describe Hand do
   end
 
   describe '#compare' do
-    it 'sfinds simple winning hands' do
+    it 'finds simple winning hands' do
       expect(straight_flush_hand <=> flush_hand).to eq(1)
       expect(two_pair_hand <=> straight_hand).to eq(-1)
       expect(four_hand <=> full_house_hand).to eq(1)
