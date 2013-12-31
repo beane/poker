@@ -6,3 +6,4 @@ This is a playable poker game I wrote. Most of the code was written as test-driv
  - Hand class implements Comparable to compare hands
  - RSpec testing
  - Good OOP design
+ - Custom error classes
