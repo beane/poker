@@ -19,10 +19,19 @@ class Deck
   def deal(num_cards)
     raise OutOfCardsError if num_cards > self.cards.size
     
-    new_cards = @cards.take(num_cards)
-    @cards = @cards.drop(num_cards)
+    new_cards = cards.take(num_cards)
+    @cards = cards.drop(num_cards)
 
     new_cards
+  end
+  
+  def return_cards(cards)
+    @cards.push(cards)
+  end
+  
+  def swap(cards)
+    return_cards(cards)
+    deal(cards.size)
   end
 
 end
