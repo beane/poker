@@ -1,6 +1,5 @@
 # encoding: UTF-8
 require 'colorize'
-require_relative 'errors'
 
 class Card
 
@@ -44,9 +43,7 @@ class Card
       display += DISPLAY_VALUES[self.value]
     end
 
-    display += DISPLAY_SUITS[self.suit]
-
-    display.colorize(:color=>color, :background => :white)
+    display.colorize(:color => color, :background => :white)
   end
   
   def render

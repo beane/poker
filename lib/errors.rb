@@ -6,7 +6,7 @@ end
 
 class NoValueError < ArgumentError
   def message
-    "Card value out of bounds. Must be 1-13"
+    "Card value out of bounds. Must be 2-14. (Ace is 14.)"
   end
 end
 
