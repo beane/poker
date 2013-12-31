@@ -15,6 +15,9 @@ class Game
   end
   
   def swap
-    
+    players.each do |player|
+      cards = player.prompt_drop
+      player.add_to_hand(deck.deal(cards.size))
+    end
   end
 end

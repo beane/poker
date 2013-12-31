@@ -57,6 +57,10 @@ class Hand
     @cards.delete(card)
   end
   
+  def + (cards)
+    @cards += cards
+  end
+  
   def to_s
     cards.map { |card| card.display }.join(',')
   end

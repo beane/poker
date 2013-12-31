@@ -33,5 +33,4 @@ class Deck
     return_cards(cards)
     deal(cards.size)
   end
-
 end

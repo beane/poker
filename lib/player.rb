@@ -9,6 +9,10 @@ class Player
     @hand = Hand.new(cards)
   end
   
+  def add_to_hand(cards)
+    @hand += cards
+  end
+  
   def drop(cards)
     cards.each do |card|
       @hand.delete(card)
