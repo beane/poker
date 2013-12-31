@@ -33,7 +33,7 @@ class Hand
     :high_card
   end
 
-  # returns -1 if it beats the other hand, 1 if it loses, 0 if tied
+  # returns 1 if it beats the other hand, -1 if it loses, 0 if tied
   def <=>(other_hand)
     comparison = HAND_VALUES[rank] <=> HAND_VALUES[other_hand.rank]
     return comparison unless comparison == 0
@@ -59,6 +59,7 @@ class Hand
   
   def + (cards)
     @cards += cards
+    self
   end
   
   def to_s
