@@ -1,6 +1,6 @@
 # encoding: UTF-8
 require 'rspec'
-require 'card'
+require 'poker'
 
 describe Card do
   subject(:card) { Card.new(13, :heart) }

@@ -1,5 +1,5 @@
 require 'rspec'
-require 'deck'
+require 'poker'
 
 describe Deck do
 

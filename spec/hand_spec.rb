@@ -1,5 +1,5 @@
 require 'rspec'
-require 'hand'
+require 'poker'
 
 describe Hand do
   let(:deck) { double("deck", :deal => [
