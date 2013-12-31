@@ -20,6 +20,13 @@ class Game
     winner = find_winner
     winner_index = players.index(winner)
     puts "Player #{winner_index + 1} wins!"
+    
+    new_deck
+  end
+  
+  def new_deck
+    @deck = Deck.new
+    nil
   end
   
   private

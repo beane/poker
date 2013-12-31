@@ -15,3 +15,10 @@ class OutOfCardsError < StandardError
     "All 52 cards have been dealt."
   end
 end
+
+class TooManyCardsError < ArgumentError
+  def message
+    "You can't discard that many cards."
+  end
+end
+  
