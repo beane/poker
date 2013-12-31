@@ -32,6 +32,10 @@ class Card
     
     @value, @suit = value, suit
   end
+  
+  def == (other_card)
+    value == other_card.value && suit == other_card.suit
+  end
 
   def display
     color = SUIT_COLORS[self.suit]
